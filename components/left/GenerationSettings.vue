@@ -30,6 +30,7 @@ watchEffect(() => {
         >
           <option value="english">English</option>
           <option value="japanese">Japanese</option>
+          <option value="vietnamese">Vietnamese</option>
           <option value="spanish">Spanish</option>
         </select>
       </div>
@@ -42,6 +43,7 @@ watchEffect(() => {
         >
           <option value="english">English</option>
           <option value="japanese">Japanese</option>
+          <option value="vietnamese">Vietnamese</option>
           <option value="spanish">Spanish</option>
         </select>
       </div>

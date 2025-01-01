@@ -53,7 +53,7 @@ export class ScopeManager {
       primaryModel: "gemini-2.0-flash-exp",
       utilityModel: "gemini-2.0-flash-exp",
       generationSettings: {
-        maxOutputTokens: 100,
+        maxOutputTokens: 4096,
         temperature: 0.7,
         topP: 1,
         topK: 40,
