@@ -11,6 +11,9 @@ const props = defineProps<{
 
 const settings = ref<ScopeSettings>(props.scope.getSettings());
 
+const languages = ["english", "japanese", "chinese (simplified)", "chinese (traditional)", "spanish"];
+const customLanguage = ref("");
+
 watchEffect(() => {
   props.scope.updateSettings(settings.value);
 });
@@ -28,11 +31,17 @@ watchEffect(() => {
           v-model="settings.language"
           class="border rounded p-2"
         >
-          <option value="english">English</option>
-          <option value="japanese">Japanese</option>
-          <option value="vietnamese">Vietnamese</option>
-          <option value="spanish">Spanish</option>
+          <option v-for="lang in languages" :key="lang" :value="lang">{{ lang.charAt(0).toUpperCase() + lang.slice(1) }}</option>
+          <option value="custom">Custom</option>
         </select>
+        <input
+          v-if="settings.language === 'custom'"
+          v-model="customLanguage"
+          @input="settings.language = customLanguage"
+          type="text"
+          placeholder="Enter custom language"
+          class="border rounded p-2 mt-2"
+        />
       </div>
       <div class="flex flex-col gap-1">
         <label for="nativelanguage" class="text-sm">Native Language</label>
@@ -41,11 +50,17 @@ watchEffect(() => {
           v-model="settings.nativeLanguage"
           class="border rounded p-2"
         >
-          <option value="english">English</option>
-          <option value="japanese">Japanese</option>
-          <option value="vietnamese">Vietnamese</option>
-          <option value="spanish">Spanish</option>
+          <option v-for="lang in languages" :key="lang" :value="lang">{{ lang.charAt(0).toUpperCase() + lang.slice(1) }}</option>
+          <option value="custom">Custom</option>
         </select>
+        <input
+          v-if="settings.nativeLanguage === 'custom'"
+          v-model="customLanguage"
+          @input="settings.nativeLanguage = customLanguage"
+          type="text"
+          placeholder="Enter custom language"
+          class="border rounded p-2 mt-2"
+        />
       </div>
 
       <div class="flex flex-row gap-1">
