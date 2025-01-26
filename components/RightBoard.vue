@@ -6,11 +6,13 @@ import { RotateCcw, Save, ArrowBigRight, FileCheck, CircleCheckBig } from "lucid
 
 import SituationViewer from "./right/SituationViewer.vue";
 import History from "./right/History.vue";
+import { View } from "../utils/view";
 
 const props = defineProps<{
   manager?: ScopeManager;
   situation?: Situation;
   scope: Scope;
+  view: View;
 }>();
 
 const restart = () => {
@@ -21,59 +23,51 @@ const restart = () => {
 </script>
 
 <template>
-  <div class="flex flex-col w-full max-w-sm h-full border-l">
-    <History
-      v-if="scope.getStage() == 'generate' || scope.getStage() == 'overview'"
-      :manager="manager"
-      :scope="scope"
-    />
-    <SituationViewer
-      v-else-if="
-        (situation && scope.getStage() == 'report') ||
-        scope.getStage() == 'situations'
-      "
-      :situation="situation"
-      :scope="scope"
-    />
-    <div class="flex flex-col flex-grow items-center justify-center border-t">
-      <div class="flex border">
-        <button
-          v-if="scope.getStage() == 'situations'"
-          class="h-24 w-24 bg-neutral-100 flex flex-col gap-2 items-center justify-center hover:bg-neutral-200"
-          @click="scope.finishSituation()"
-        >
-          <h2 class="text-xs">Score Conversation</h2>
-          <FileCheck />
-        </button>
-        <button
-          v-else-if="scope.getStage() == 'report'"
-          class="h-24 w-24 bg-neutral-100 flex flex-col gap-2 items-center justify-center hover:bg-neutral-200"
-          @click="scope.next()"
-        >
-          <h2 class="text-xs">Move to next Conversation</h2>
-          <ArrowBigRight />
-        </button>
-        <button
-          v-if="scope.allCompleted()"
-          class="h-24 w-24 bg-blue-500 flex flex-col gap-2 items-center justify-center hover:bg-blue-600"
-          @click="scope.restart()"
-        >
-          <h2 class="text-xs">End Session</h2>
-          <CircleCheckBig />
-        </button>
-      </div>
+  <div
+    :class="{ 'hidden xl:flex': view.current[0] != 'r' }"
+    class="flex-col w-full xl:max-w-sm xl:h-full h-[calc(100vh-4rem)] border-l border-t xl:border-t-0"
+  >
+    <div class="flex flex-col h-[calc(100vh-8rem)] xl:h-full flex-grow overflow-y-auto">
+      <History
+        v-if="scope.getStage() == 'generate' || scope.getStage() == 'overview'"
+        :manager="manager"
+        :scope="scope"
+      />
+      <SituationViewer
+        v-else-if="(situation && scope.getStage() == 'report') || scope.getStage() == 'situations'"
+        :situation="situation"
+        :scope="scope"
+      />
     </div>
     <div class="h-16 flex items-center justify-end border-t">
+      <button
+        v-if="scope.getStage() == 'situations'"
+        class="border h-16 w-24 bg-green-200 border-green-400 flex flex-col gap-2 items-center justify-center hover:bg-green-300"
+        @click="scope.finishSituation()"
+      >
+        <h2 class="text-xs">Score Conversation</h2>
+      </button>
+      <button
+        v-else-if="scope.getStage() == 'report'"
+        class="border h-16 w-24 bg-blue-200 border-blue-400 flex flex-col gap-2 items-center justify-center hover:bg-blue-300"
+        @click="scope.next()"
+      >
+        <h2 class="text-xs">Move to next Conversation</h2>
+      </button>
+      <button
+        v-if="scope.allCompleted()"
+        class="border h-16 w-24 bg-red-200 border-red-400 flex flex-col gap-2 items-center justify-center hover:bg-red-300"
+        @click="scope.restart()"
+      >
+        <h2 class="text-xs">End Session</h2>
+      </button>
       <button
         class="border-l h-16 w-16 flex items-center justify-center"
         @click="manager?.saveCurrentScope()"
       >
         <Save />
       </button>
-      <button
-        class="border-l h-16 w-16 flex items-center justify-center"
-        @click="restart"
-      >
+      <button class="border-l h-16 w-16 flex items-center justify-center" @click="restart">
         <RotateCcw />
       </button>
     </div>

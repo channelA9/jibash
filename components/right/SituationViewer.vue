@@ -19,27 +19,28 @@ const timerString = (time: number) => {
 </script>
 
 <template>
-  <div class="flex justify-center h-16 border-b">
+  <div class="flex flex-col justify-center xl:h-16 border-b">
     <div v-if="scope.getSettings().timerEnabled == true">
       <h1 class="text-lg">
         {{ timerString((scope.getTimer()?.getTimeLeft() ?? 0) / 1000) }}
       </h1>
     </div>
-    <button
-      class="flex items-center justify-center p-2 w-16 h-16"
-      @click="scope.previous()"
-    >
-      <ChevronsLeft />
-    </button>
-    <h1 class="w-16 h-16 flex items-center justify-center">
-      {{ scope.getSituationIndex() + 1 }}
-    </h1>
-    <button
-      class="flex items-center justify-center p-2 w-16 h-16"
-      @click="scope.next()"
-    >
-      <ChevronsRight />
-    </button>
+    <div class="flex justify-center items-center">
+      <button class="flex items-center justify-center p-2 px-4 xl:h-16 xl:w-16" @click="scope.previous()">
+        <ChevronsLeft />
+      </button>
+      <h1 class="xl:h-16 xl:w-16 w-8 flex items-center justify-center">
+        {{ scope.getSituationIndex() + 1 }}
+      </h1>
+      <button class="flex items-center justify-center p-2 px-4 xl:h-16 xl:w-16" @click="scope.next()">
+        <ChevronsRight />
+      </button>
+    </div>
+    <div class="xl:hidden w-full flex items-center justify-center p-2">
+      <h1 class="text-xs">
+        {{ situation?.getTitle() }}
+      </h1>
+    </div>
   </div>
   <ShowEditNode
     v-if="situation"
@@ -54,10 +55,6 @@ const timerString = (time: number) => {
     :update-function="situation.setDescription.bind(situation)"
   />
   <div v-if="situation" class="border-b p-4 flex flex-col flex-grow">
-    <AgentBlock
-      v-for="(agent, i) in situation.getAgents()"
-      :key="`${i}-${agent}`"
-      :agent="agent"
-    />
+    <AgentBlock v-for="(agent, i) in situation.getAgents()" :key="`${i}-${agent}`" :agent="agent" />
   </div>
 </template>

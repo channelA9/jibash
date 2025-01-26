@@ -18,9 +18,7 @@ const props = defineProps<{
   <div class="flex flex-col gap-4 m-auto h-full max-w-md">
     <template v-if="report">
       <div class="p-8 flex flex-col gap-4">
-        <div
-          class="flex justify-center items-center mx-auto p-4 rounded"
-        >
+        <div class="flex justify-center items-center mx-auto p-4 rounded">
           <div class="flex flex-col items-center justify-center">
             <label class="text-lg">Overall</label>
             <h1 class="text-4xl font-black">{{ report.score.overall }}</h1>
@@ -45,57 +43,7 @@ const props = defineProps<{
         <h1 class="text-xl">Summary</h1>
         <p class="text-sm">{{ report.analysis }}</p>
       </div>
-      <div
-        class="flex flex-col gap-4 h-full p-8"
-      >
-        <div
-          v-for="comment in report.comments"
-          :key="`comment-${comment.quote}`"
-          class="flex flex-col items-start justify-center h-32 border-neutral-300"
-        >
-          <p class="text-sm italic">"{{ comment.quote }}"</p>
-          <p class="text-xs">{{ comment.analysis }}</p>
-        </div>
-        <div
-          v-for="comment in report.comments"
-          :key="`comment-${comment.quote}`"
-          class="flex flex-col items-start justify-center h-32 border-neutral-300"
-        >
-          <p class="text-sm italic">"{{ comment.quote }}"</p>
-          <p class="text-xs">{{ comment.analysis }}</p>
-        </div>
-        <div
-          v-for="comment in report.comments"
-          :key="`comment-${comment.quote}`"
-          class="flex flex-col items-start justify-center h-32 border-neutral-300"
-        >
-          <p class="text-sm italic">"{{ comment.quote }}"</p>
-          <p class="text-xs">{{ comment.analysis }}</p>
-        </div>
-        <div
-          v-for="comment in report.comments"
-          :key="`comment-${comment.quote}`"
-          class="flex flex-col items-start justify-center h-32 border-neutral-300"
-        >
-          <p class="text-sm italic">"{{ comment.quote }}"</p>
-          <p class="text-xs">{{ comment.analysis }}</p>
-        </div>
-        <div
-          v-for="comment in report.comments"
-          :key="`comment-${comment.quote}`"
-          class="flex flex-col items-start justify-center h-32 border-neutral-300"
-        >
-          <p class="text-sm italic">"{{ comment.quote }}"</p>
-          <p class="text-xs">{{ comment.analysis }}</p>
-        </div>
-        <div
-          v-for="comment in report.comments"
-          :key="`comment-${comment.quote}`"
-          class="flex flex-col items-start justify-center h-32 border-neutral-300"
-        >
-          <p class="text-sm italic">"{{ comment.quote }}"</p>
-          <p class="text-xs">{{ comment.analysis }}</p>
-        </div>
+      <div class="flex flex-col gap-4 h-full p-8">
         <div
           v-for="comment in report.comments"
           :key="`comment-${comment.quote}`"

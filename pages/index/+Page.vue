@@ -14,14 +14,15 @@ import VN from "../../components/center/VN.vue";
 import Loading from "../../components/subcomponents/Loading.vue";
 import { ScopeManager } from "../../ai/ScopeManager";
 import AlertView from "../../components/AlertView.vue";
+import { View } from "../../utils/view";
 
 const generated = ref<boolean>(false);
-
 const manager = ref<ScopeManager>();
 const scope = reactive<Scope>(new Scope()) as Scope;
 const situation = ref<Situation>();
 const stage = ref<string>("generate");
 const loaded = ref<boolean>(false);
+const view = reactive<View>(new View('main')) as View;
 // generated.value = true;
 
 onMounted(() => {
@@ -39,9 +40,9 @@ watchEffect(() => {
 
 <template>
   <AlertView :scope="scope" />
-  <div v-if="loaded" class="flex w-full h-full">
-    <LeftBoard :situation="situation" :scope="scope"> </LeftBoard>
-    <div class="flex flex-col h-full flex-grow overflow-y-auto">
+  <div v-if="loaded" class="flex flex-col xl:flex-row w-full h-full">
+    <LeftBoard :view="view" :situation="situation" :scope="scope"> </LeftBoard>
+    <div :class="{'': view.current == 'main', 'hidden xl:flex': view.current != 'main'}" class="flex-col xl:h-full flex-grow overflow-y-auto">
       <Create v-if="stage == 'generate'" :scope="scope" />
       <Overview v-else-if="stage == 'overview'" :scope="scope" />
       <template
@@ -59,7 +60,7 @@ watchEffect(() => {
       />
       <Loading v-else />
     </div>
-    <RightBoard :manager="manager" :situation="situation" :scope="scope"> </RightBoard>
+    <RightBoard :view="view" :manager="manager" :situation="situation" :scope="scope"> </RightBoard>
   </div>
   <Loading v-else />
 </template>

@@ -14,12 +14,13 @@ const emit = defineEmits<{
 <template>
   <div class="flex gap-4 pl-2 h-fit p-4 border-b border-neutral-100">
     <Avatar v-if="props.sender != 'SYSTEM'" />
+    <div v-else class="w-5"></div>
     <div
       v-if="props.sender != 'SYSTEM'"
       class="flex flex-col flex-grow w-full h-full group gap-1"
     >
       <div class="flex">
-        <label id="sender" class="text-sm font-light flex-grow">{{
+        <label id="sender" class="text-xs md:text-sm font-light flex-grow">{{
           props.sender
         }}</label>
         <span class="group-hover:flex hidden">
@@ -30,7 +31,7 @@ const emit = defineEmits<{
           />
         </span>
       </div>
-      <p id="message-content" class="max-w-xl">{{ props.content }}</p>
+      <p id="message-content" class="max-w-2xl text-sm md:text-base">{{ props.content }}</p>
     </div>
     <div v-else class="flex flex-col gap-1 flex-grow w-full h-full pl-7 group pb-4">
       <div class="flex">
@@ -45,7 +46,7 @@ const emit = defineEmits<{
       </div>
       <p
         id="message-content"
-        class="text-neutral-700 font-light max-w-xl mx-auto"
+        class="text-neutral-700 font-light max-w-2xl text-sm md:text-base"
       >
         {{ props.content }}
       </p>
