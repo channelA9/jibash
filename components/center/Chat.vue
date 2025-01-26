@@ -40,7 +40,7 @@ watch(
 </script>
 
 <template>
-  <div class="flex flex-col w-full flex-grow h-full overflow-y-auto bg-white">
+  <div class="flex flex-col w-full flex-grow h-[calc(100vh-4rem)] xl:overflow-y-auto bg-white">
     <div ref="chatContainer" class="flex flex-col flex-grow overflow-y-scroll">
       <ChatMessage
         v-for="(msg, i) in messages"

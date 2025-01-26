@@ -14,6 +14,10 @@ watch(value, () => {
   props.updateFunction(value.value);
 });
 
+watch(props, () => {
+  value.value = props.varValue
+});
+
 const toggleEditMode = () => {
   editMode.value = !editMode.value;
 };
@@ -22,7 +26,7 @@ const toggleEditMode = () => {
 <template>
   <div v-if="value" class="flex flex-col w-full border-b p-4 group">
     <div class="flex items-center">
-      <h2 class="text-lg flex-grow">{{ title }}</h2>
+      <h2 class="text-sm md:text-lg flex-grow">{{ title }}</h2>
       <button
         class="text-sm text-neutral-500 underline"
         :class="{ 'flex': editMode, 'hidden group-hover:flex': !editMode }"
@@ -32,12 +36,12 @@ const toggleEditMode = () => {
       </button>
     </div>
     <template v-if="!editMode">
-      <p class="text-sm text-neutral-800">{{ value }}</p>
+      <p class="text-xs md:text-sm text-neutral-800">{{ value }}</p>
     </template>
     <template v-else>
       <textarea
         v-model="value"
-        class="border border-neutral-300 p-1 w-full text-sm min-h-24 h-fit max-h-36"
+        class="border border-neutral-300 p-1 w-full text-xs md:text-sm min-h-24 h-fit max-h-36"
       />
     </template>
   </div>

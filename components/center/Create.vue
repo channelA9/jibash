@@ -4,7 +4,7 @@ import ChatSubtext from "../subcomponents/ChatSubtext.vue";
 import { Scope } from "../../ai/Scope";
 import { ref } from "vue";
 import Logo from "../subcomponents/Logo.vue";
-
+import { Play } from "lucide-vue-next";
 const props = defineProps<{
   scope: Scope;
 }>();
@@ -22,7 +22,7 @@ function handleSubmit() {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2 w-full items-center h-[700px]">
+  <div class="flex flex-col gap-2 w-full items-center h-[700px] p-8 xl:p-0 text-center xl:text-left">
     <div class="flex flex-col max-w-xl gap-4 my-auto">
       <div class="flex justify-center p-2">
         <Logo/>
@@ -45,9 +45,9 @@ function handleSubmit() {
           placeholder="Describe what you'd like to practice here..."
         />
         <button
-          class="w-14 rounded border bg-blue-500 border-blue-700"
+          class="w-14 rounded border bg-blue-500 border-blue-700 text-white flex items-center justify-center"
           type="submit"
-        ></button>
+        ><Play /></button>
       </form>
     </div>
   </div>

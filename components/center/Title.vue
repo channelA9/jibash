@@ -9,7 +9,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="flex w-full h-16 min-h-16 items-center justify-center border-b">
+  <div class="flex w-full h-16 items-center justify-center border-b">
     <h1 class="text-xl">{{ situation.getTitle() ?? '' }}</h1>
   </div>
 </template>

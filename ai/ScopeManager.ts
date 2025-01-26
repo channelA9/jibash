@@ -38,7 +38,7 @@ export class ScopeManager {
     return {
       language: "japanese",
       nativeLanguage: "english",
-      scenarioCount: 2,
+      scenarioCount: 1,
       minAgents: 1,
       maxAgents: 3,
       languageLevel: "N3",
