@@ -69,19 +69,14 @@ export class ScopeManager {
     };
   }
 
-  newScope(name: string) {
+  newScope(scope: Scope, name: string) {
     if (this.scopes.has(name)) {
       throw new Error(`Scope with name ${name} already exists`);
     }
-    const scope = new Scope();
+    scope.name = name
     this.scopes.set(name, scope);
     this.currentScopeName = name;
     return scope;
-  }
-
-  addScope(scope: Scope) {
-    this.scopes.set(scope.name, scope);
-    this.currentScopeName = scope.name;
   }
 
   getScope(name: string): Scope | undefined {
@@ -89,10 +84,12 @@ export class ScopeManager {
   }
 
   deleteScope(name: string) {
+    console.log(name)
+    this.scopes.forEach((scope) => {console.log(scope)})
     if (this.scopes.has(name)) {
       this.scopes.delete(name);
-      scopeSave.deleteScope(name);
     }
+    console.log(scopeSave.deleteScope(name))
   }
 
 

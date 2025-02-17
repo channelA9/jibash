@@ -3,7 +3,6 @@ import {
   GoogleGenerativeAI,
   SchemaType,
   Schema,
-  GenerationConfig,
   SafetySetting,
   HarmCategory,
   HarmBlockThreshold,
@@ -17,6 +16,7 @@ import {
   SituationSettings,
 } from "../defs/types";
 
+
 const safetySettings: SafetySetting[]  = [
   { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
   { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE },
@@ -26,7 +26,9 @@ const safetySettings: SafetySetting[]  = [
 
 export class GeminiInterface extends AIInterface {
   public models: string[] = [
-    "gemini-2.0-flash-exp",
+    "gemini-2.0-pro-exp",
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-thinking-exp",
     "gemini-1.5-pro",
     "gemini-1.5-flash",
     "gemini-1.5-flash-8b",
@@ -43,6 +45,9 @@ export class GeminiInterface extends AIInterface {
   };
 
   private genAI = new GoogleGenerativeAI("");
+
+
+
   private primaryModel = this.genAI.getGenerativeModel({
     model: this.primaryModelName,
   });
@@ -52,7 +57,6 @@ export class GeminiInterface extends AIInterface {
 
   constructor(apiKeys: APIKeys) {
     super();
-
     if (apiKeys.google) {
       this.setAPIKey(apiKeys.google);
     }
@@ -232,10 +236,12 @@ export class GeminiInterface extends AIInterface {
     }
   }
 
-  public async generateScenarios(goal: string) {
+  public async generateScenarios(goal: string, instruction: string) {
+    console.log(instruction)
     try {
       const request: GenerateContentRequest = {
         contents: [{ role: "user", parts: [{ text: goal }] }],
+        systemInstruction: instruction,
         generationConfig: {
           ...this.generationSettings,
           responseMimeType: "application/json",

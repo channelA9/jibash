@@ -61,7 +61,7 @@ export class AIInterface {
     return 0;
   }
 
-  public async generateScenarios(_goal: string): Promise<SituationSettings[]> {
+  public async generateScenarios(_goal: string, _instruction: string): Promise<SituationSettings[]> {
     return await [
       {
         title: "",

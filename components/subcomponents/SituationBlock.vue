@@ -6,14 +6,13 @@ const props = defineProps<{
   situation: Situation;
 }>();
 
-const trunc = props.situation.getDescription();
 const settings = props.situation.getSettings();
 </script>
 
 <template>
   <div class="flex flex-col h-fit w-full max-w-md mx-auto gap-1 py-2">
     <h1 class="text-lg">{{ props.situation.getTitle() }}</h1>
-    <p class="font-light text-sm">{{ trunc }}</p>
+    <p class="font-light text-sm">{{ props.situation.getDescription() }}</p>
     <div class="flex gap-12 mt-8">
       <div id="agents" class="flex flex-grow -space-x-4">
         <Avatar

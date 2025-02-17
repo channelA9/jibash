@@ -21,7 +21,7 @@ const timerString = (time: number) => {
 <template>
   <div class="flex flex-col justify-center xl:h-16 border-b">
     <div v-if="scope.getSettings().timerEnabled == true">
-      <h1 class="text-lg">
+      <h1 class="text-lg w-full">
         {{ timerString((scope.getTimer()?.getTimeLeft() ?? 0) / 1000) }}
       </h1>
     </div>
