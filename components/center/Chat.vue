@@ -46,7 +46,7 @@ watch(
         v-for="(msg, i) in messages"
         :key="`${msg.sender}-${i}`"
         :content="msg.content"
-        :sender="msg.sender"
+        :sender="msg.sender == 'user' ? props.situation.getScope().userProfile.name : msg.sender"
         @delete-message="props.situation.deleteMessage(i)"
       />
       <div

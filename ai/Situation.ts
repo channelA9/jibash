@@ -45,8 +45,6 @@ export class Situation {
       );
     });
     this.messages = [...messageLog];
-    console.log(messageLog)
-    console.log(this.messages)
   }
 
   private async getNextSpeaker() {
@@ -175,24 +173,28 @@ export class Situation {
 
       // no cloning clause
 
-      promptMessages.push({
-        sender: "SYSTEM",
-        content: `Continuing the conversation...`,
-      });
+      // promptMessages.push({
+      //   sender: "SYSTEM",
+      //   content: `Continuing the conversation...`,
+      // });
+
+      const prompt = promptFilter.filter(
+        this.messages.length == 0
+          ? SituationPrompts.FirstMultiGen
+          : SituationPrompts.MultiGen,
+        {
+          ...this.scope.promptFilters,
+          agents: JSON.stringify(agentNamesList),
+        }
+      )
+
+      console.log("Prompt: " + prompt)
 
       const newConversationMessages =
         await this.getModelInterface().multiPrompt(
           promptMessages,
           this.settings,
-          promptFilter.filter(
-            this.messages.length == 0
-              ? SituationPrompts.FirstMultiGen
-              : SituationPrompts.MultiGen,
-            {
-              ...this.scope.promptFilters,
-              agents: JSON.stringify(agentNamesList),
-            }
-          )
+          prompt
         );
 
       if (this.messages.length == 0)

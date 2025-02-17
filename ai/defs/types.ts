@@ -71,7 +71,7 @@ export interface Message {
 
 // prompt related
 export interface Filters {
-  agents?: string;
+  agents?: string; // list of relevant agent names, such as for deciding who speaks next
   action?: string;
   language?: string;
   nativeLanguage?: string;
@@ -80,6 +80,7 @@ export interface Filters {
   scenarioCount?: number;
   minAgents?: number;
   maxAgents?: number;
+  userDefinition?: string;
 }
 
 export interface AIInterfaceGenerationSettings {

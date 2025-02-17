@@ -27,7 +27,7 @@ const view = reactive<View>(new View('main')) as View;
 
 onMounted(() => {
   manager.value = new ScopeManager();
-  manager.value.addScope(scope);
+  manager.value.newScope(scope, new Date().toLocaleString());
   scope.initialize(manager.value.loadSavedSettings());
   loaded.value = true;
 });

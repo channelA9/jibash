@@ -36,6 +36,7 @@
     "@vue/server-renderer": "^3.4.31",
     "cross-fetch": "^4.0.0",
     "lucide-vue-next": "^0.468.0",
+    "openai": "^4.85.1",
     "unplugin-vue-markdown": "^0.26.2",
     "vike": "^0.4.179",
     "vike-cloudflare": "^0.0.4",
