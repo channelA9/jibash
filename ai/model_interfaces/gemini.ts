@@ -26,12 +26,9 @@ const safetySettings: SafetySetting[]  = [
 
 export class GeminiInterface extends AIInterface {
   public models: string[] = [
-    "gemini-2.0-pro-exp",
+    "gemini-2.5-flash-preview-05-20",
+    "gemini-2.5-pro-preview-06-05",
     "gemini-2.0-flash",
-    "gemini-2.0-flash-thinking-exp",
-    "gemini-1.5-pro",
-    "gemini-1.5-flash",
-    "gemini-1.5-flash-8b",
   ];
 
   public primaryModelName = this.models[0];
