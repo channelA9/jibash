@@ -9,7 +9,7 @@ import {
 } from "../defs/types";
 
 export class OpenAIInterface extends AIInterface {
-  public models: string[] = ["gpt-4o", "gpt-4o-mini", "o1", "o1-mini", "o3-mini"];
+  public models: string[] = ["gpt-5", "gpt-4o", "gpt-4o-mini", "o1", "o1-mini", "o3-mini"];
 
   public primaryModelName = this.models[0];
   public utilityModelName = this.models[0];
